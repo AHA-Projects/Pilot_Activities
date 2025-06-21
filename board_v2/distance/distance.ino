@@ -20,6 +20,10 @@ Adafruit_ST7789 display = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST); // Initializ
 
 VL53L0X sensor;
 
+#define BLACK   0x0000
+#define WHITE   0xFFFF
+
+
 void setup()
 {
   Serial.begin(115200);
@@ -39,12 +43,6 @@ void setup()
   // instead, provide a desired inter-measurement period in
   // ms (e.g. sensor.startContinuous(100)).
   sensor.startContinuous();
-}
-
-void loop()
-{
-
-
   display.fillScreen(BLACK); \
   display.setCursor(0,0);
   display.setTextColor(WHITE);
@@ -52,6 +50,13 @@ void loop()
   display.println("Please check your serial ");
   display.setCursor(0, 20);
   display.print("monitor for distance readings.");
+}
+
+void loop()
+{
+
+
+
 
   Serial.print("Distance (cm) : ");
   Serial.print((sensor.readRangeContinuousMillimeters() / 10.0));
